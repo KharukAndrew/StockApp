@@ -14,6 +14,8 @@ namespace StockApp.WEB.Util
         public override void Load()
         {
             Bind<IServicesLists<StockDTO>>().To<StockService>();
+            Bind<IServicesLists<ProductDTO>>().To<ProductService>();
+            Bind<IServicesLists<ProviderDTO>>().To<ProviderService>();
         }
     }
 }
