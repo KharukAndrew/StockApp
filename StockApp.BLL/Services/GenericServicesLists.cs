@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StockApp.BLL.Services
 {
-    //TODO: возможность создания генерик сервиса - как преобразоватьDatabase.Stocks?
+    //TODO: возможность создания генерик сервиса - как преобразовать Database.Stocks?
     public class GenericServicesLists<T, D> : IServicesLists<T> where T : class
     {
         IUnitOfWork Database { get; set; }
