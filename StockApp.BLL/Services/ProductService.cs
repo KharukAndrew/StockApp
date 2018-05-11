@@ -23,8 +23,8 @@ namespace StockApp.BLL.Services
         public IEnumerable<ProductDTO> GetAll()
         {
             IEnumerable<Product> list = Database.Products.GetAll();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()).CreateMapper();
-            IEnumerable<ProductDTO> listDTO = mapper.Map<IEnumerable<Product>, List<ProductDTO>>(list);
+
+            IEnumerable<ProductDTO> listDTO = Mapper.Map<IEnumerable<ProductDTO>>(list);
 
             return listDTO;
         }
@@ -32,8 +32,8 @@ namespace StockApp.BLL.Services
         public ProductDTO Get(int id)
         {
             Product product =  Database.Products.Get(id);
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()).CreateMapper();
-            ProductDTO productDTO = mapper.Map<Product, ProductDTO>(product);
+
+            ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
 
             return productDTO;
         }
@@ -46,8 +46,7 @@ namespace StockApp.BLL.Services
 
         public void Create(ProductDTO productDTO)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, Product>()).CreateMapper();
-            Product product = mapper.Map<ProductDTO, Product>(productDTO);
+            Product product = Mapper.Map<Product>(productDTO);
 
             Database.Products.Create(product);
             Database.Save();
@@ -55,8 +54,7 @@ namespace StockApp.BLL.Services
 
         public void Update(ProductDTO productDTO)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, Product>()).CreateMapper();
-            Product product = mapper.Map<ProductDTO, Product>(productDTO);
+            Product product = Mapper.Map<Product>(productDTO);
 
             Database.Products.Update(product);
             Database.Save();

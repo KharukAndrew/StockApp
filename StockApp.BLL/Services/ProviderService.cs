@@ -21,17 +21,13 @@ namespace StockApp.BLL.Services
         }
 
         public IEnumerable<ProviderDTO> GetAll()
-        {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Provider, ProviderDTO>()).CreateMapper();
-            
-            return mapper.Map<IEnumerable<Provider>, List<ProviderDTO>>(Database.Providers.GetAll());
+        {            
+            return Mapper.Map<IEnumerable<ProviderDTO>>(Database.Providers.GetAll());
         }
 
         public ProviderDTO Get(int id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Provider, ProviderDTO>()).CreateMapper();
-
-            return mapper.Map<Provider, ProviderDTO>(Database.Providers.Get(id));
+            return Mapper.Map<ProviderDTO>(Database.Providers.Get(id));
         }
 
         //TODO: Create this method!
@@ -42,17 +38,13 @@ namespace StockApp.BLL.Services
 
         public void Create(ProviderDTO item)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, Provider>()).CreateMapper();
-
-            Database.Providers.Create(mapper.Map<ProviderDTO, Provider>(item));
+            Database.Providers.Create(Mapper.Map<Provider>(item));
             Database.Save();
         }
 
         public void Update(ProviderDTO item)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, Provider>()).CreateMapper();
-
-            Database.Providers.Update(mapper.Map<ProviderDTO, Provider>(item));
+            Database.Providers.Update(Mapper.Map<Provider>(item));
             Database.Save();
         }
 

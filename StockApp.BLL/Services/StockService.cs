@@ -19,16 +19,14 @@ namespace StockApp.BLL.Services
 
         public IEnumerable<StockDTO> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Stock, StockDTO>()).CreateMapper();
-            IEnumerable<StockDTO> list = mapper.Map<IEnumerable<Stock>, List<StockDTO>>(Database.Stocks.GetAll());
+            IEnumerable<StockDTO> list = Mapper.Map<IEnumerable<StockDTO>>(Database.Stocks.GetAll());
 
             return list;
         }
 
         public StockDTO Get(int id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Stock, StockDTO>()).CreateMapper();
-            StockDTO item = mapper.Map<Stock, StockDTO>(Database.Stocks.Get(id));
+            StockDTO item = Mapper.Map<StockDTO>(Database.Stocks.Get(id));
 
             return item;
         }
@@ -45,16 +43,14 @@ namespace StockApp.BLL.Services
 
         public void Create(StockDTO item)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, Stock>()).CreateMapper();
-            Stock stock = mapper.Map< StockDTO, Stock>(item);
+            Stock stock = Mapper.Map<Stock>(item);
             Database.Stocks.Create(stock);
             Database.Save();
         }
 
         public void Update(StockDTO item)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, Stock>()).CreateMapper();
-            Stock stock = mapper.Map<StockDTO, Stock>(item);
+            Stock stock = Mapper.Map<Stock>(item);
             Database.Stocks.Update(stock);
             Database.Save();
         }
