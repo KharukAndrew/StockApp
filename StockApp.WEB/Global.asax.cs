@@ -1,6 +1,7 @@
 ﻿using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Mvc;
+using StockApp.WEB.App_Start;
 using StockApp.WEB.Util;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,9 @@ namespace StockApp.WEB
             NinjectModule serviceModule = new StockApp.BLL.Util.NinjectRegistrations();
             var kernel = new StandardKernel(viewModule, serviceModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
+            //сопостовление экземпляров моделей - AutoMapper
+            MapperConfig.ConfigureMapping();
         }
     }
 }

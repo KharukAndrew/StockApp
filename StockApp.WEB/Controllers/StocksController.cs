@@ -22,9 +22,7 @@ namespace StockApp.WEB.Controllers
         // GET: Stocks
         public ActionResult Index()
         {
-            IEnumerable<StockDTO> stockDTOs = stockService.GetAll();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, StockViewModel>()).CreateMapper();
-            IEnumerable<StockViewModel> list = mapper.Map<IEnumerable<StockDTO>, List<StockViewModel>>(stockDTOs);
+            IEnumerable<StockViewModel> list = Mapper.Map<IEnumerable<StockViewModel>>(stockService.GetAll());
 
             return View(list);
         }
@@ -38,8 +36,8 @@ namespace StockApp.WEB.Controllers
         [HttpPost]
         public ActionResult Create(StockViewModel stockView)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockViewModel, StockDTO>()).CreateMapper();
-            StockDTO stockDTO = mapper.Map<StockViewModel, StockDTO>(stockView);
+            StockDTO stockDTO = Mapper.Map<StockDTO>(stockView);
+
             stockService.Create(stockDTO);
 
             return RedirectToAction("Index");
@@ -51,10 +49,7 @@ namespace StockApp.WEB.Controllers
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            StockDTO stockDTO = stockService.Get(id.Value);
-
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, StockViewModel>()).CreateMapper();
-            StockViewModel stockView = mapper.Map<StockDTO, StockViewModel>(stockDTO);
+            StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
 
             return View(stockView);
         }
@@ -62,10 +57,7 @@ namespace StockApp.WEB.Controllers
         [HttpPost]
         public ActionResult Edit(StockViewModel stockView)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockViewModel, StockDTO>()).CreateMapper();
-            StockDTO stockDTO = mapper.Map<StockViewModel, StockDTO>(stockView);
-
-            stockService.Update(stockDTO);
+            stockService.Update(Mapper.Map<StockDTO>(stockView));
 
             return RedirectToAction("Index");
         }
@@ -75,10 +67,7 @@ namespace StockApp.WEB.Controllers
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            StockDTO stockDTO = stockService.Get(id.Value);
-
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, StockViewModel>()).CreateMapper();
-            StockViewModel stockView = mapper.Map<StockDTO, StockViewModel>(stockDTO);
+            StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
 
             return View(stockView);
         }
@@ -89,10 +78,7 @@ namespace StockApp.WEB.Controllers
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            StockDTO stockDTO = stockService.Get(id.Value);
-
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, StockViewModel>()).CreateMapper();
-            StockViewModel stockView = mapper.Map<StockDTO, StockViewModel>(stockDTO);
+            StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
 
             return View(stockView);
         }

@@ -22,8 +22,7 @@ namespace StockApp.WEB.Controllers
         // GET: Providers
         public ActionResult Index()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderViewModel>()).CreateMapper();
-            IEnumerable<ProviderViewModel> listView = mapper.Map<IEnumerable<ProviderDTO>, List<ProviderViewModel>>(providerService.GetAll());
+            IEnumerable<ProviderViewModel> listView = Mapper.Map<IEnumerable<ProviderViewModel>>(providerService.GetAll());
 
             return View(listView);
         }
@@ -37,8 +36,7 @@ namespace StockApp.WEB.Controllers
         [HttpPost]
         public ActionResult Create(ProviderViewModel providerView)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderViewModel, ProviderDTO>()).CreateMapper();
-            ProviderDTO providerDTO = mapper.Map<ProviderViewModel, ProviderDTO>(providerView);
+            ProviderDTO providerDTO = Mapper.Map<ProviderDTO>(providerView);
 
             providerService.Create(providerDTO);
 
@@ -56,8 +54,7 @@ namespace StockApp.WEB.Controllers
             if (providerDTO == null)
                 return HttpNotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderViewModel>()).CreateMapper();
-            ProviderViewModel providerView = mapper.Map<ProviderDTO, ProviderViewModel>(providerDTO);
+            ProviderViewModel providerView = Mapper.Map<ProviderViewModel>(providerDTO);
 
             return View(providerView);
         }
@@ -65,8 +62,7 @@ namespace StockApp.WEB.Controllers
         [HttpPost]
         public ActionResult Edit(ProviderViewModel providerView)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderViewModel, ProviderDTO>()).CreateMapper();
-            ProviderDTO providerDTO = mapper.Map<ProviderViewModel, ProviderDTO>(providerView);
+            ProviderDTO providerDTO = Mapper.Map<ProviderDTO>(providerView);
 
             providerService.Update(providerDTO);
 
@@ -83,8 +79,7 @@ namespace StockApp.WEB.Controllers
             if (providerDTO == null)
                 return HttpNotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderViewModel>()).CreateMapper();
-            ProviderViewModel providerView = mapper.Map<ProviderDTO, ProviderViewModel>(providerDTO);
+            ProviderViewModel providerView = Mapper.Map<ProviderViewModel>(providerDTO);
 
             return View(providerView);
         }
@@ -100,8 +95,7 @@ namespace StockApp.WEB.Controllers
             if (providerDTO == null)
                 return HttpNotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderViewModel>()).CreateMapper();
-            ProviderViewModel providerView = mapper.Map<ProviderDTO, ProviderViewModel>(providerDTO);
+            ProviderViewModel providerView = Mapper.Map<ProviderViewModel>(providerDTO);
 
             return View(providerView);
         }

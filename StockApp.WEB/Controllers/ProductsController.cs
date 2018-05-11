@@ -22,8 +22,7 @@ namespace StockApp.WEB.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
-            IEnumerable<ProductViewModel> listView = mapper.Map<IEnumerable<ProductDTO>, List<ProductViewModel>>(productService.GetAll());
+            IEnumerable<ProductViewModel> listView = Mapper.Map<IEnumerable<ProductViewModel>>(productService.GetAll());
             return View(listView);
         }
 
@@ -36,9 +35,7 @@ namespace StockApp.WEB.Controllers
         [HttpPost]
         public ActionResult Create(ProductViewModel productView)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductViewModel, ProductDTO>()).CreateMapper();
-            ProductDTO productDTO = mapper.Map<ProductViewModel, ProductDTO>(productView);
-
+            ProductDTO productDTO = Mapper.Map<ProductDTO>(productView);
             productService.Create(productDTO);
 
             return RedirectToAction("Index");
@@ -55,17 +52,14 @@ namespace StockApp.WEB.Controllers
             if (productDTO == null)
                 return HttpNotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
-            ProductViewModel productView = mapper.Map<ProductDTO, ProductViewModel> (productDTO);
-
+            ProductViewModel productView = Mapper.Map<ProductViewModel>(productDTO);
             return View(productView);
         }
 
         [HttpPost]
         public ActionResult Edit(ProductViewModel productView)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductViewModel, ProductDTO>()).CreateMapper();
-            ProductDTO productDTO = mapper.Map<ProductViewModel, ProductDTO>(productView);
+            ProductDTO productDTO = Mapper.Map<ProductDTO>(productView);
 
             productService.Update(productDTO);
 
@@ -82,8 +76,7 @@ namespace StockApp.WEB.Controllers
             if (productDTO == null)
                 return HttpNotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
-            ProductViewModel productView = mapper.Map<ProductDTO, ProductViewModel>(productDTO);
+            ProductViewModel productView = Mapper.Map<ProductViewModel>(productDTO);
 
             return View(productView);
         }
@@ -99,8 +92,7 @@ namespace StockApp.WEB.Controllers
             if (productDTO == null)
                 return HttpNotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
-            ProductViewModel productView = mapper.Map<ProductDTO, ProductViewModel>(productDTO);
+            ProductViewModel productView = Mapper.Map<ProductViewModel>(productDTO);
 
             return View(productView);
         }
