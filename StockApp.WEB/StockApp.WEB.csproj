@@ -215,6 +215,18 @@
     <Content Include="Views\Stocks\Index.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Providers\Index.cshtml" />
+    <Content Include="Views\Stocks\Create.cshtml" />
+    <Content Include="Views\Stocks\Edit.cshtml" />
+    <Content Include="Views\Stocks\Details.cshtml" />
+    <Content Include="Views\Stocks\Delete.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Providers\Create.cshtml" />
+    <Content Include="Views\Providers\Edit.cshtml" />
+    <Content Include="Views\Providers\Details.cshtml" />
+    <Content Include="Views\Providers\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

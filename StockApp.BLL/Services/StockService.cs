@@ -45,17 +45,24 @@ namespace StockApp.BLL.Services
 
         public void Create(StockDTO item)
         {
-            throw new NotImplementedException();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, Stock>()).CreateMapper();
+            Stock stock = mapper.Map< StockDTO, Stock>(item);
+            Database.Stocks.Create(stock);
+            Database.Save();
         }
 
         public void Update(StockDTO item)
         {
-            throw new NotImplementedException();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StockDTO, Stock>()).CreateMapper();
+            Stock stock = mapper.Map<StockDTO, Stock>(item);
+            Database.Stocks.Update(stock);
+            Database.Save();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Database.Stocks.Delete(id);
+            Database.Save();
         }
 
         public void Dispose()

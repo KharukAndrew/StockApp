@@ -27,36 +27,44 @@ namespace StockApp.BLL.Services
             return mapper.Map<IEnumerable<Provider>, List<ProviderDTO>>(Database.Providers.GetAll());
         }
 
-        public void Create(ProviderDTO item)
+        public ProviderDTO Get(int id)
         {
-            throw new NotImplementedException();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Provider, ProviderDTO>()).CreateMapper();
+
+            return mapper.Map<Provider, ProviderDTO>(Database.Providers.Get(id));
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
+        //TODO: Create this method!
         public IEnumerable<ProviderDTO> Find(Func<ProviderDTO, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public ProviderDTO Get(int id)
+        public void Create(ProviderDTO item)
         {
-            throw new NotImplementedException();
-        }
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, Provider>()).CreateMapper();
 
-        
+            Database.Providers.Create(mapper.Map<ProviderDTO, Provider>(item));
+            Database.Save();
+        }
 
         public void Update(ProviderDTO item)
         {
-            throw new NotImplementedException();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, Provider>()).CreateMapper();
+
+            Database.Providers.Update(mapper.Map<ProviderDTO, Provider>(item));
+            Database.Save();
+        }
+
+        public void Delete(int id)
+        {
+            Database.Providers.Delete(id);
+            Database.Save();
+        }
+
+        public void Dispose()
+        {
+            Database.Dispose();
         }
     }
 }

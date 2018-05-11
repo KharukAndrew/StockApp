@@ -29,36 +29,48 @@ namespace StockApp.BLL.Services
             return listDTO;
         }
 
-        public void Create(ProductDTO item)
+        public ProductDTO Get(int id)
         {
-            throw new NotImplementedException();
+            Product product =  Database.Products.Get(id);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>()).CreateMapper();
+            ProductDTO productDTO = mapper.Map<Product, ProductDTO>(product);
+
+            return productDTO;
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
+        //TODO: create method
         public IEnumerable<ProductDTO> Find(Func<ProductDTO, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public ProductDTO Get(int id)
+        public void Create(ProductDTO productDTO)
         {
-            throw new NotImplementedException();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, Product>()).CreateMapper();
+            Product product = mapper.Map<ProductDTO, Product>(productDTO);
+
+            Database.Products.Create(product);
+            Database.Save();
         }
 
-        
-
-        public void Update(ProductDTO item)
+        public void Update(ProductDTO productDTO)
         {
-            throw new NotImplementedException();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, Product>()).CreateMapper();
+            Product product = mapper.Map<ProductDTO, Product>(productDTO);
+
+            Database.Products.Update(product);
+            Database.Save();
+        }
+
+        public void Delete(int id)
+        {
+            Database.Products.Delete(id);
+            Database.Save();
+        }
+
+        public void Dispose()
+        {
+            Database.Dispose();
         }
     }
 }

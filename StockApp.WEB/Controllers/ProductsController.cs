@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using StockApp.WEB.Models;
+using System.Net;
 
 namespace StockApp.WEB.Controllers
 {
@@ -24,6 +25,98 @@ namespace StockApp.WEB.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
             IEnumerable<ProductViewModel> listView = mapper.Map<IEnumerable<ProductDTO>, List<ProductViewModel>>(productService.GetAll());
             return View(listView);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(ProductViewModel productView)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductViewModel, ProductDTO>()).CreateMapper();
+            ProductDTO productDTO = mapper.Map<ProductViewModel, ProductDTO>(productView);
+
+            productService.Create(productDTO);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            ProductDTO productDTO = productService.Get(id.Value);
+
+            if (productDTO == null)
+                return HttpNotFound();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
+            ProductViewModel productView = mapper.Map<ProductDTO, ProductViewModel> (productDTO);
+
+            return View(productView);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProductViewModel productView)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductViewModel, ProductDTO>()).CreateMapper();
+            ProductDTO productDTO = mapper.Map<ProductViewModel, ProductDTO>(productView);
+
+            productService.Update(productDTO);
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            ProductDTO productDTO = productService.Get(id.Value);
+
+            if (productDTO == null)
+                return HttpNotFound();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
+            ProductViewModel productView = mapper.Map<ProductDTO, ProductViewModel>(productDTO);
+
+            return View(productView);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            ProductDTO productDTO = productService.Get(id.Value);
+
+            if (productDTO == null)
+                return HttpNotFound();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, ProductViewModel>()).CreateMapper();
+            ProductViewModel productView = mapper.Map<ProductDTO, ProductViewModel>(productDTO);
+
+            return View(productView);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            productService.Delete(id);
+
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            productService.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
