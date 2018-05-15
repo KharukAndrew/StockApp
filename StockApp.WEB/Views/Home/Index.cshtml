@@ -2,34 +2,37 @@
     ViewBag.Title = "Home Page";
 }
 
-<div>
-   <h2>Lists</h2> 
-   <ul>
-       <li>@Html.ActionLink("Stocks", "Index", "Stocks")</li>
-       <li>@Html.ActionLink("Products", "Index", "Products")</li>
-       <li>@Html.ActionLink("Providers", "Index", "Providers")</li>
-   </ul>
+<div class="row">
+    <div class="col-md-3">
+        <h2>Lists</h2>
+        <ul>
+            <li>@Html.ActionLink("Stocks", "Index", "Stocks")</li>
+            <li>@Html.ActionLink("Products", "Index", "Products")</li>
+            <li>@Html.ActionLink("Providers", "Index", "Providers")</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Documents</h2>
+        <ul>
+            <li>InputInvoice</li>
+            <li>OutputInviice</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Registers</h2>
+        <ul>
+            <li>ProductsRegister</li>
+            <li>PricesRegister</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Reports</h2>
+        <ul>
+            <li>ProductsBalance</li>
+        </ul>
+    </div>
 </div>
 
-<div>
-    <h2>Documents</h2>
-    <ul>
-        <li>InputInvoice</li>
-        <li>OutputInviice</li>
-    </ul>
-</div>
 
-<div>
-    <h2>Registers</h2>
-    <ul>
-        <li>ProductsRegister</li>
-        <li>PricesRegister</li>
-    </ul>
-</div>
 
-<div>
-    <h2>Reports</h2>
-    <ul>
-        <li>ProductsBalance</li>
-    </ul>
-</div>
+
