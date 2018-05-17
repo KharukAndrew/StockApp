@@ -29,9 +29,9 @@ namespace StockApp.BLL.Services
             return listDTO;
         }
 
-        public ProductDTO Get(int id)
+        public async Task<ProductDTO> GetAsync(int id)
         {
-            Product product =  Database.Products.Get(id);
+            Product product = await  Database.Products.GetAsync(id);
 
             ProductDTO productDTO = Mapper.Map<ProductDTO>(product);
 
@@ -44,26 +44,26 @@ namespace StockApp.BLL.Services
             throw new NotImplementedException();
         }
 
-        public void Create(ProductDTO productDTO)
+        public async Task CreateAsync(ProductDTO productDTO)
         {
             Product product = Mapper.Map<Product>(productDTO);
 
             Database.Products.Create(product);
-            Database.Save();
+            await Database.SaveAsync();
         }
 
-        public void Update(ProductDTO productDTO)
+        public async Task UpdateAsync(ProductDTO productDTO)
         {
             Product product = Mapper.Map<Product>(productDTO);
 
             Database.Products.Update(product);
-            Database.Save();
+            await Database.SaveAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            Database.Products.Delete(id);
-            Database.Save();
+            await Database.Products.DeleteAsync(id);
+            await Database.SaveAsync();
         }
 
         public void Dispose()

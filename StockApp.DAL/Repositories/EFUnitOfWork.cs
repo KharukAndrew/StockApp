@@ -51,9 +51,9 @@ namespace StockApp.DAL.Repositories
             }
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         private bool disposed = false;

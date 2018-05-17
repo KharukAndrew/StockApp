@@ -35,22 +35,22 @@ namespace StockApp.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProviderViewModel providerView)
+        public async Task<ActionResult> Create(ProviderViewModel providerView)
         {
             ProviderDTO providerDTO = Mapper.Map<ProviderDTO>(providerView);
 
-            providerService.Create(providerDTO);
+            await providerService.CreateAsync(providerDTO);
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ProviderDTO providerDTO = providerService.Get(id.Value);
+            ProviderDTO providerDTO = await providerService.GetAsync(id.Value);
 
             if (providerDTO == null)
                 return HttpNotFound();
@@ -61,21 +61,21 @@ namespace StockApp.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProviderViewModel providerView)
+        public async Task<ActionResult> Edit(ProviderViewModel providerView)
         {
             ProviderDTO providerDTO = Mapper.Map<ProviderDTO>(providerView);
 
-            providerService.Update(providerDTO);
+            await providerService.UpdateAsync(providerDTO);
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ProviderDTO providerDTO = providerService.Get(id.Value);
+            ProviderDTO providerDTO = await providerService.GetAsync(id.Value);
 
             if (providerDTO == null)
                 return HttpNotFound();
@@ -86,12 +86,12 @@ namespace StockApp.WEB.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ProviderDTO providerDTO = providerService.Get(id.Value);
+            ProviderDTO providerDTO = await providerService.GetAsync(id.Value);
 
             if (providerDTO == null)
                 return HttpNotFound();
@@ -102,9 +102,9 @@ namespace StockApp.WEB.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            providerService.Delete(id);
+            await providerService.DeleteAsync(id);
 
             return RedirectToAction("Index");
         }

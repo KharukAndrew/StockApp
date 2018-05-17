@@ -25,9 +25,9 @@ namespace StockApp.BLL.Services
             return Mapper.Map<IEnumerable<ProviderDTO>>(await Database.Providers.GetAllAsync());
         }
 
-        public ProviderDTO Get(int id)
+        public async Task<ProviderDTO> GetAsync(int id)
         {
-            return Mapper.Map<ProviderDTO>(Database.Providers.Get(id));
+            return Mapper.Map<ProviderDTO>(await Database.Providers.GetAsync(id));
         }
 
         //TODO: Create this method!
@@ -36,22 +36,22 @@ namespace StockApp.BLL.Services
             throw new NotImplementedException();
         }
 
-        public void Create(ProviderDTO item)
+        public async Task CreateAsync(ProviderDTO item)
         {
             Database.Providers.Create(Mapper.Map<Provider>(item));
-            Database.Save();
+            await Database.SaveAsync();
         }
 
-        public void Update(ProviderDTO item)
+        public async Task UpdateAsync(ProviderDTO item)
         {
             Database.Providers.Update(Mapper.Map<Provider>(item));
-            Database.Save();
+            await Database.SaveAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            Database.Providers.Delete(id);
-            Database.Save();
+            await Database.Providers.DeleteAsync(id);
+            await Database.SaveAsync();
         }
 
         public void Dispose()

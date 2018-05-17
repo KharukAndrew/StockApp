@@ -7,10 +7,10 @@ namespace StockApp.BLL.Interfaces
     public interface IServicesLists<T> : IDisposable where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
-        T Get(int id);
+        Task<T> GetAsync(int id);
         IEnumerable<T> Find(Func<T, Boolean> predicate);
-        void Create(T item);
-        void Update(T item);
-        void Delete(int id);
+        Task CreateAsync(T item);
+        Task UpdateAsync(T item);
+        Task DeleteAsync(int id);
     }
 }

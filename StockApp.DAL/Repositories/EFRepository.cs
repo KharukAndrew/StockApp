@@ -24,9 +24,9 @@ namespace StockApp.DAL.Repositories
             return await dbSet.AsNoTracking().ToListAsync();
         }
 
-        public T Get(int id)
+        public async Task<T> GetAsync(int id)
         {
-            return dbSet.Find(id);
+            return await dbSet.FindAsync(id);
         }
 
         public IEnumerable<T> Find(Func<T, bool> predicate)
@@ -44,9 +44,9 @@ namespace StockApp.DAL.Repositories
             db.Entry(item).State = EntityState.Modified;
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            T item = Get(id);
+            T item = await GetAsync(id);
             if(item != null)
                 dbSet.Remove(item);
         }        

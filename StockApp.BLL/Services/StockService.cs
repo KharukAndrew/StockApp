@@ -25,9 +25,9 @@ namespace StockApp.BLL.Services
             return list;
         }
 
-        public StockDTO Get(int id)
+        public async Task<StockDTO> GetAsync(int id)
         {
-            StockDTO item = Mapper.Map<StockDTO>(Database.Stocks.Get(id));
+            StockDTO item = Mapper.Map<StockDTO>(await Database.Stocks.GetAsync(id));
 
             return item;
         }
@@ -42,24 +42,24 @@ namespace StockApp.BLL.Services
             return list;
         }
 
-        public void Create(StockDTO item)
+        public async Task CreateAsync(StockDTO item)
         {
             Stock stock = Mapper.Map<Stock>(item);
             Database.Stocks.Create(stock);
-            Database.Save();
+            await Database.SaveAsync();
         }
 
-        public void Update(StockDTO item)
+        public async Task UpdateAsync(StockDTO item)
         {
             Stock stock = Mapper.Map<Stock>(item);
             Database.Stocks.Update(stock);
-            Database.Save();
+            await Database.SaveAsync();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            Database.Stocks.Delete(id);
-            Database.Save();
+            await Database.Stocks.DeleteAsync(id);
+            await Database.SaveAsync();
         }
 
         public void Dispose()

@@ -13,6 +13,6 @@ namespace StockApp.DAL.Interfaces
         IRepository<Product> Products { get; }
         IRepository<Provider> Providers { get; }
 
-        void Save();
+        Task SaveAsync();
     }
 }

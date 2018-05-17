@@ -35,59 +35,59 @@ namespace StockApp.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(StockViewModel stockView)
+        public async Task<ActionResult> Create(StockViewModel stockView)
         {
             StockDTO stockDTO = Mapper.Map<StockDTO>(stockView);
 
-            stockService.Create(stockDTO);
+            await stockService.CreateAsync(stockDTO);
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
+            StockViewModel stockView = Mapper.Map<StockViewModel>(await stockService.GetAsync(id.Value));
 
             return PartialView(stockView);
         }
 
         [HttpPost]
-        public ActionResult Edit(StockViewModel stockView)
+        public async Task<ActionResult> Edit(StockViewModel stockView)
         {
-            stockService.Update(Mapper.Map<StockDTO>(stockView));
+            await stockService.UpdateAsync(Mapper.Map<StockDTO>(stockView));
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
+            StockViewModel stockView = Mapper.Map<StockViewModel>(await stockService.GetAsync(id.Value));
 
             return PartialView(stockView);
         }
 
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
+            StockViewModel stockView = Mapper.Map<StockViewModel>(await stockService.GetAsync(id.Value));
 
             return PartialView(stockView);
         }
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            stockService.Delete(id);
+            await stockService.DeleteAsync(id);
 
             return RedirectToAction("Index");
         }
