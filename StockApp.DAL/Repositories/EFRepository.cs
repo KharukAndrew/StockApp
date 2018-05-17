@@ -19,9 +19,9 @@ namespace StockApp.DAL.Repositories
             this.dbSet = db.Set<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return dbSet.AsNoTracking().ToList();
+            return await dbSet.AsNoTracking().ToListAsync();
         }
 
         public T Get(int id)

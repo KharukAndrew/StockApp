@@ -5,6 +5,7 @@ using StockApp.DAL.Entities;
 using StockApp.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StockApp.BLL.Services
 {
@@ -17,9 +18,9 @@ namespace StockApp.BLL.Services
             Database = uow;
         }
 
-        public IEnumerable<StockDTO> GetAll()
+        public async Task<IEnumerable<StockDTO>> GetAllAsync()
         {
-            IEnumerable<StockDTO> list = Mapper.Map<IEnumerable<StockDTO>>(Database.Stocks.GetAll());
+            IEnumerable<StockDTO> list = Mapper.Map<IEnumerable<StockDTO>>(await Database.Stocks.GetAllAsync());
 
             return list;
         }

@@ -20,9 +20,9 @@ namespace StockApp.BLL.Services
             Database = uow;
         }
 
-        public IEnumerable<ProductDTO> GetAll()
+        public async Task<IEnumerable<ProductDTO>> GetAllAsync()
         {
-            IEnumerable<Product> list = Database.Products.GetAll();
+            IEnumerable<Product> list = await Database.Products.GetAllAsync();
 
             IEnumerable<ProductDTO> listDTO = Mapper.Map<IEnumerable<ProductDTO>>(list);
 

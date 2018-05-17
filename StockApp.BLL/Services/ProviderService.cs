@@ -20,9 +20,9 @@ namespace StockApp.BLL.Services
             Database = uow;
         }
 
-        public IEnumerable<ProviderDTO> GetAll()
+        public async Task<IEnumerable<ProviderDTO>> GetAllAsync()
         {            
-            return Mapper.Map<IEnumerable<ProviderDTO>>(Database.Providers.GetAll());
+            return Mapper.Map<IEnumerable<ProviderDTO>>(await Database.Providers.GetAllAsync());
         }
 
         public ProviderDTO Get(int id)

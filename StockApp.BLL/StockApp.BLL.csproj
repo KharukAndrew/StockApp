@@ -83,7 +83,6 @@
     <Compile Include="DTO\StockDTO.cs" />
     <Compile Include="Interfaces\IServicesLists.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\GenericServicesLists.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\ProviderService.cs" />
     <Compile Include="Services\StockService.cs" />

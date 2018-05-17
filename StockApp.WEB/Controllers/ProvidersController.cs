@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using StockApp.WEB.Models;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace StockApp.WEB.Controllers
 {
@@ -20,9 +21,9 @@ namespace StockApp.WEB.Controllers
             providerService = serv;
         }
         // GET: Providers
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            IEnumerable<ProviderViewModel> listView = Mapper.Map<IEnumerable<ProviderViewModel>>(providerService.GetAll());
+            IEnumerable<ProviderViewModel> listView = Mapper.Map<IEnumerable<ProviderViewModel>>(await providerService.GetAllAsync());
 
             return View(listView);
         }
