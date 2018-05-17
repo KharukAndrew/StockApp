@@ -30,7 +30,7 @@ namespace StockApp.WEB.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -56,7 +56,7 @@ namespace StockApp.WEB.Controllers
 
             ProviderViewModel providerView = Mapper.Map<ProviderViewModel>(providerDTO);
 
-            return View(providerView);
+            return PartialView(providerView);
         }
 
         [HttpPost]
@@ -81,7 +81,7 @@ namespace StockApp.WEB.Controllers
 
             ProviderViewModel providerView = Mapper.Map<ProviderViewModel>(providerDTO);
 
-            return View(providerView);
+            return PartialView(providerView);
         }
 
         [HttpGet]
@@ -97,7 +97,7 @@ namespace StockApp.WEB.Controllers
 
             ProviderViewModel providerView = Mapper.Map<ProviderViewModel>(providerDTO);
 
-            return View(providerView);
+            return PartialView(providerView);
         }
 
         [HttpPost, ActionName("Delete")]

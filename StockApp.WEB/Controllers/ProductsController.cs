@@ -29,7 +29,7 @@ namespace StockApp.WEB.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -53,7 +53,7 @@ namespace StockApp.WEB.Controllers
                 return HttpNotFound();
 
             ProductViewModel productView = Mapper.Map<ProductViewModel>(productDTO);
-            return View(productView);
+            return PartialView(productView);
         }
 
         [HttpPost]
@@ -78,7 +78,7 @@ namespace StockApp.WEB.Controllers
 
             ProductViewModel productView = Mapper.Map<ProductViewModel>(productDTO);
 
-            return View(productView);
+            return PartialView(productView);
         }
 
         [HttpGet]
@@ -94,7 +94,7 @@ namespace StockApp.WEB.Controllers
 
             ProductViewModel productView = Mapper.Map<ProductViewModel>(productDTO);
 
-            return View(productView);
+            return PartialView(productView);
         }
 
         [HttpPost, ActionName("Delete")]

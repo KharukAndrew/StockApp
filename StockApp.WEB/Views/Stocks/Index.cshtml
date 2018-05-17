@@ -4,12 +4,19 @@
     ViewBag.Title = "Stocks List";
 }
 
-<h2>Stocks</h2>
+<h2>Stocks List</h2>
 
-<p>
-    @Html.ActionLink("Create New Stock", "Create")
-</p>
-<table class="table">
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+<div class="btn-group">
+    <a href="@Url.Action("Create")" class="myStock btn btn-primary">
+        <i class="glyphicon glyphicon-plus"></i>  Create
+    </a>
+</div>
+
+<table class="table table-bordered table-striped table-condensed table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Number)
@@ -23,23 +30,47 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id=item.Id })" class="myStock btn btn-info">
+                    <i class="glyphicon glyphicon-pencil"></i> Edit
+                </a>
+                <a href="@Url.Action("Details", new {id=@item.Id })" class="myStock btn btn-success">
+                    <i class="glyphicon glyphicon-search"></i>  Details
+                </a>
+                <a href="@Url.Action("Delete", new { id=item.Id })" class="myStock btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i> Delete
+                </a>
+            </td>
+        </tr>
+    }
 </table>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".myStock").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+}

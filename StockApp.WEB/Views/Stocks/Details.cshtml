@@ -4,39 +4,52 @@
     ViewBag.Title = "Details Stock";
 }
 
-<h2>Details this Stock</h2>
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h3>Details of Stock</h3>
+    </div>
 
-<div>
-    <h4>StockViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Number)
-        </dt>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Number)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Number)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Number)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
+
+    <div class="modal-footer">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="@Url.Action("Edit")" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-arrow-left"></i> Back to Edit
+                </a>
+                <a href="@Url.Action("Index")" class="btn btn-default">
+                    <i class="glyphicon glyphicon-arrow-left"></i> Back to list
+                </a>
+            </div>
+        </div>
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

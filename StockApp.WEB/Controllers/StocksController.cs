@@ -30,7 +30,7 @@ namespace StockApp.WEB.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace StockApp.WEB.Controllers
 
             StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
 
-            return View(stockView);
+            return PartialView(stockView);
         }
 
         [HttpPost]
@@ -69,7 +69,7 @@ namespace StockApp.WEB.Controllers
 
             StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
 
-            return View(stockView);
+            return PartialView(stockView);
         }
 
         [HttpGet]
@@ -80,7 +80,7 @@ namespace StockApp.WEB.Controllers
 
             StockViewModel stockView = Mapper.Map<StockViewModel>(stockService.Get(id.Value));
 
-            return View(stockView);
+            return PartialView(stockView);
         }
 
         [HttpPost, ActionName("Delete")]
